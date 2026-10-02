@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Screening System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-icon">AI</div>
+
+        <div>
+            <h1>AI Resume Screening</h1>
+            <p>Intelligent Candidate Analysis</p>
+        </div>
+    </div>
+
+    <div class="status">
+        <span class="status-dot"></span>
+        System Ready
+    </div>
+
+</header>
+
+
+<main class="page">
+
+    <section class="hero">
+
+        <h2>Resume Screening Dashboard</h2>
+
+        <p>
+            Compare candidate resumes with job requirements
+            and generate an intelligent screening analysis.
+        </p>
+
+    </section>
+
+
+    <section class="workspace">
+
+
+        <!-- LEFT PANEL -->
+
+        <div class="card input-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Job Requirements</h3>
+                    <p>Enter the position requirements</p>
+                </div>
+
+                <span class="step">01</span>
+
+            </div>
+
+
+            <label for="job">
+                Job Description
+            </label>
+
+            <textarea
+                id="job"
+                placeholder="Example:
+
+We are looking for a Java Developer with 2+ years of experience.
+
+Required skills:
+Java
+Spring Boot
+SQL
+REST API
+Git
+
+Education:
+Bachelor's degree in Computer Science or related field."
+            ></textarea>
+
+
+            <div class="input-footer">
+
+                <span>
+                    Include skills, experience and education requirements.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+
+        <div class="card input-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Candidate Resume</h3>
+                    <p>Upload the candidate resume</p>
+                </div>
+
+                <span class="step">02</span>
+
+            </div>
+
+
+            <label for="resume">
+                Resume File
+            </label>
+
+
+            <label class="upload-area" for="resume">
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+                <strong>
+                    Choose Resume Files
+                </strong>
+                <div class="upload-area" id="uploadArea">
+
+    <div class="upload-icon">↑</div>
+
+    <strong>Choose Resume</strong>
+
+    <span>
+        Click here to select PDF, DOCX or TXT
+    </span>
+
+    <input
+        type="file"
+        id="resume"
+        name="resume"
+        accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
+        multiple
+    >
+
+</div>
+
+<div id="selectedFiles" class="selected-file">
+    No resume selected
+</div>
+
+                >
+
+            
+
+
+        </div>
+
+    </section>
+
+
+    <!-- SCREEN BUTTON -->
+
+    <section class="action-section">
+
+        <button
+            id="screenButton"
+            onclick="screenResume()"
+        >
+
+            <span class="button-icon">
+                ✦
+            </span>
+
+            Screen Resume
+
+        </button>
+
+        <p>
+            The system will analyze the resume against the job requirements.
+        </p>
+
+    </section>
+
+
+    <!-- PROCESSING -->
+
+    <section
+        id="loading"
+        class="processing-card"
+    >
+
+        <div class="loader"></div>
+
+        <h3>Analyzing Resume</h3>
+
+        <p id="processingText">
+            Reading candidate information...
+        </p>
+
+        <div class="progress-container">
+
+            <div
+                id="progressBar"
+                class="progress-bar"
+            ></div>
+
+        </div>
+
+        <span id="progressPercent">
+            0%
+        </span>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section
+        id="result"
+        class="results-section"
+    >
+
+        <div class="results-header">
+
+            <div>
+                <h2>Screening Result</h2>
+                <p>
+                    Candidate analysis completed
+                </p>
+            </div>
+
+            <div
+                id="decision"
+                class="decision"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <div class="score-grid">
+
+
+            <div class="score-card">
+
+                <span>Match Score</span>
+
+                <strong id="score">
+                    -
+                </strong>
+
+                <small>
+                    Overall compatibility
+                </small>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <span>Candidate</span>
+
+                <strong id="candidateName">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <span>Experience</span>
+
+                <strong id="experience">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <span>Education</span>
+
+                <strong id="education">
+                    -
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="result-grid">
+
+
+            <div class="result-card">
+
+                <h3>
+                    Matching Skills
+                </h3>
+
+                <ul id="matchingSkills"></ul>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <h3>
+                    Missing Skills
+                </h3>
+
+                <ul id="missingSkills"></ul>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h3>
+                Screening Summary
+            </h3>
+
+            <p id="summary">
+                -
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        AI Resume Screening System
+        <span>•</span>
+        Job-related qualification analysis
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
